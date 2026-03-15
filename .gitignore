@@ -1,0 +1,24 @@
+# Environment variables / secrets
+.env
+.env.local
+.env.production
+
+# Strava data (contains personal activity data)
+data/my-data.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+package-lock.json
+
+# Build output
+dist/

@@ -1,0 +1,75 @@
+{
+  "athlete": {
+    "name": "Your Name",
+    "device": "Garmin Forerunner 965",
+    "dataRange": "Oct 28 2025 — Mar 14 2026",
+    "totalActivities": 200
+  },
+  "career": {
+    "running":  { "sessions": 557, "distance": "2,786 mi", "time": "483.8h", "elevation": "47,021'" },
+    "cycling":  { "sessions": 106, "distance": "908 mi",   "time": "74.1h",  "elevation": "11,766'" },
+    "swimming": { "sessions": 23,  "distance": "17.7 mi",  "time": "15.0h",  "elevation": "—" },
+    "weights":  { "sessions": "52*", "distance": "—",       "time": "80.0h",  "elevation": "—" },
+    "total":    { "sessions": 738, "distance": "3,712 mi",  "time": "652.9h", "elevation": "58,787'" }
+  },
+  "ticker": {
+    "ytdRun": "226.7 mi",
+    "ytdRide": "246.3 mi",
+    "weeklyAvg": "21.5 mi/wk",
+    "streak": "6 days",
+    "activePct": "85%",
+    "maxHR": "192 bpm"
+  },
+  "kpis": {
+    "avgPace": { "value": "9:37", "delta": "from 10:25 career", "direction": "down" },
+    "bestPace": { "value": "7:45", "delta": "Hachie Relay", "direction": "up" },
+    "avgCadence": { "value": "81", "unit": "spm", "delta": "range 76-87", "direction": "flat" },
+    "avgPower": { "value": "242", "unit": "W", "delta": "247W in Mar", "direction": "up" }
+  },
+  "hrZones": {
+    "z1": 0, "z2": 61, "z3": 37, "z4": 2, "z5": 0,
+    "polarization": "61/2 — TARGET 80/20",
+    "efficiencyEasy": "9:43/mi @ 135bpm",
+    "efficiencyHard": "9:12/mi @ 150bpm"
+  },
+  "weeklyVolume": {
+    "weeks": ["Oct 27","Nov 3","Nov 10","Nov 17","Nov 24","Dec 1","Dec 8","Dec 15","Dec 22","Dec 29","Jan 5","Jan 12","Jan 19","Jan 26","Feb 2","Feb 9","Feb 16","Feb 23","Mar 2","Mar 9"],
+    "runMiles": [43.3,50.8,50.2,31.3,0,0,1.5,7.1,9.1,12.4,17.9,19.2,18.2,24.4,15.0,16.2,18.7,31.3,34.4,28.2],
+    "rideMiles": [0,0,0,0,38.9,59.3,24.4,10.6,31.4,0,0,56.3,53.3,46.4,20.9,43.2,0,26.1,0,0],
+    "runHours": [6.7,7.7,7.9,4.8,0,0,0.3,1.2,1.5,2.0,2.8,3.2,3.0,4.0,2.3,2.7,3.0,5.0,5.2,4.4],
+    "rideHours": [0,0,0,0,6.3,3.2,3.8,1.7,2.5,0,2.8,3.0,3.0,3.1,1.4,3.5,0,1.1,0,0.5],
+    "wtHours": [3.3,4.4,3.2,4.7,0,1.4,5.5,5.8,3.0,3.0,4.8,5.0,4.6,4.7,4.0,4.8,4.9,3.3,5.1,4.5]
+  },
+  "paceEvolution": {
+    "months": ["Oct 25","Nov 25","Dec 25","Jan 26","Feb 26","Mar 26"],
+    "avgPaces": [9.40, 9.30, 10.12, 9.77, 9.65, 9.38],
+    "fastPaces": [8.48, 8.23, 8.87, 8.02, 8.68, 7.75],
+    "avgPower": [248, 252, 236, 235, 240, 247]
+  },
+  "keyEfforts": [
+    { "date": "Mar 7",  "name": "Hachie 50 Relay",         "dist": "10.02mi", "pace": "7:45", "hr": 171, "prs": 4, "highlight": true },
+    { "date": "Feb 4",  "name": "Afternoon Run",            "dist": "5.18mi",  "pace": "8:41", "hr": 150, "prs": 3 },
+    { "date": "Jan 6",  "name": "Geriatric Track Club",     "dist": "4.98mi",  "pace": "8:01", "hr": 148, "prs": 0 },
+    { "date": "Nov 15", "name": "Saturday tired legs",      "dist": "11.61mi", "pace": "9:10", "hr": 148, "prs": 1 },
+    { "date": "Nov 8",  "name": "Back to Back 50mi Weeks",  "dist": "12.11mi", "pace": "9:07", "hr": 144, "prs": 0 },
+    { "date": "Nov 4",  "name": "16racks with WRC",         "dist": "10.0mi",  "pace": "8:14", "hr": 142, "prs": 0 }
+  ],
+  "trainingInsights": {
+    "alerts": [
+      { "severity": "critical", "title": "LONG RUN GAP — 112 DAYS", "text": "No training long run between Nov 15 and Mar 7 race. Reintroduce 8-9mi weekly long run, build 1mi/wk to 12-14mi." },
+      { "severity": "warn",     "title": "GREY ZONE OVERLOAD — 37% Z3", "text": "Too much moderate intensity. Slow easy runs to 10:15-10:30/mi (HR <130). Add 1 hard session/wk (HR 160+). Target 80/20." },
+      { "severity": "warn",     "title": "87% INDOOR — RACE DAY GAP", "text": "Indoor pace 9:53 vs outdoor 8:55/mi. Shift long run + 1 quality session outdoors weekly." },
+      { "severity": "info",     "title": "CADENCE: 81 SPM AVG", "text": "Target 85+ spm. Add metronome drills on 1-2 easy runs per week." },
+      { "severity": "info",     "title": "SWIM: 0 SESSIONS IN 2026", "text": "If tri season approaching, add 2 swims/wk (30-45min) immediately. Last pace: 3:09/100m." },
+      { "severity": "positive", "title": "REBUILD TRACKING STRONG", "text": "Mar pace 9:23 avg (247W) approaching pre-break peak (9:18, 252W). Hachie relay 7:45/mi proves race fitness." }
+    ]
+  },
+  "distribution": { "running": 36, "cycling": 21, "weights": 43 },
+  "patterns": {
+    "activeDays": "117/138",
+    "longestStreak": "22 days",
+    "multiSession": "60%",
+    "actsPerDay": "1.4",
+    "timeOfDay": { "am": 46, "mid": 36, "aft": 12, "eve": 6 }
+  }
+}

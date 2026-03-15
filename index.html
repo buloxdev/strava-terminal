@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRAVA TERMINAL — Performance Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="top-bar-left">
+    <svg class="logo-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-label="Strava Terminal">
+      <path d="M12 2L8 14h3l1 8 4-12h-3L12 2z" fill="#ff6b00" stroke="#ff6b00" stroke-width="0.5"/>
+    </svg>
+    <span class="logo-text">STRAVA<span class="logo-accent">TERMINAL</span></span>
+  </div>
+  <div class="top-bar-center">
+    <div class="ticker">
+      <!-- Populated from data/sample-data.json -->
+    </div>
+  </div>
+  <div class="top-bar-right">
+    <span class="timestamp" id="clock"></span>
+  </div>
+</header>
+
+<!-- MAIN GRID -->
+<main class="dashboard">
+
+  <!-- LEFT PANEL: Career Stats + KPIs -->
+  <section class="panel panel-career">
+    <div class="panel-header">
+      <span class="panel-title">CAREER STATISTICS</span>
+      <span class="panel-badge">ALL-TIME</span>
+    </div>
+    <div class="panel-body">
+      <table class="data-table career-table">
+        <thead>
+          <tr><th>DISCIPLINE</th><th class="num">SESSIONS</th><th class="num">DISTANCE</th><th class="num">TIME</th><th class="num">ELEV</th></tr>
+        </thead>
+        <tbody>
+          <!-- Populated from JSON -->
+        </tbody>
+      </table>
+      <div class="table-footnote"></div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">AVG RUN PACE</div>
+          <div class="kpi-value">—<span class="kpi-unit">/mi</span></div>
+          <div class="kpi-delta flat">loading</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">BEST PACE</div>
+          <div class="kpi-value">—<span class="kpi-unit">/mi</span></div>
+          <div class="kpi-delta flat">loading</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">AVG CADENCE</div>
+          <div class="kpi-value">—<span class="kpi-unit">spm</span></div>
+          <div class="kpi-delta flat">loading</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">AVG POWER</div>
+          <div class="kpi-value">—<span class="kpi-unit">W</span></div>
+          <div class="kpi-delta flat">loading</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENTER TOP: Weekly Volume Chart -->
+  <section class="panel panel-volume">
+    <div class="panel-header">
+      <span class="panel-title">WEEKLY VOLUME</span>
+      <div class="panel-tabs">
+        <button class="tab active" data-chart="mileage">MILEAGE</button>
+        <button class="tab" data-chart="hours">HOURS</button>
+      </div>
+    </div>
+    <div class="panel-body chart-container">
+      <canvas id="volumeChart"></canvas>
+    </div>
+  </section>
+
+  <!-- RIGHT TOP: HR Zone Distribution -->
+  <section class="panel panel-zones">
+    <div class="panel-header">
+      <span class="panel-title">HR INTENSITY</span>
+      <span class="panel-badge">RUNS</span>
+    </div>
+    <div class="panel-body">
+      <div class="zone-bars">
+        <div class="zone-row">
+          <span class="zone-label">Z1 RECOVERY</span>
+          <div class="zone-bar-track"><div class="zone-bar z1" style="width:1%"></div></div>
+          <span class="zone-pct">0%</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-label">Z2 EASY</span>
+          <div class="zone-bar-track"><div class="zone-bar z2" style="width:1%"></div></div>
+          <span class="zone-pct">0%</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-label">Z3 TEMPO</span>
+          <div class="zone-bar-track"><div class="zone-bar z3" style="width:1%"></div></div>
+          <span class="zone-pct">0%</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-label">Z4 THRESHOLD</span>
+          <div class="zone-bar-track"><div class="zone-bar z4" style="width:1%"></div></div>
+          <span class="zone-pct">0%</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-label">Z5 VO2MAX</span>
+          <div class="zone-bar-track"><div class="zone-bar z5" style="width:1%"></div></div>
+          <span class="zone-pct">0%</span>
+        </div>
+      </div>
+      <div class="zone-insight">
+        <div class="insight-label">POLARIZATION</div>
+        <div class="insight-val warn">—</div>
+      </div>
+      <div class="zone-insight">
+        <div class="insight-label">EFFICIENCY (EASY)</div>
+        <div class="insight-val">—</div>
+      </div>
+      <div class="zone-insight">
+        <div class="insight-label">EFFICIENCY (HARD)</div>
+        <div class="insight-val">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM LEFT: Pace Trend -->
+  <section class="panel panel-pace">
+    <div class="panel-header">
+      <span class="panel-title">PACE & POWER EVOLUTION</span>
+      <span class="panel-badge">MONTHLY</span>
+    </div>
+    <div class="panel-body chart-container">
+      <canvas id="paceChart"></canvas>
+    </div>
+  </section>
+
+  <!-- BOTTOM CENTER: Key Efforts -->
+  <section class="panel panel-efforts">
+    <div class="panel-header">
+      <span class="panel-title">KEY EFFORTS</span>
+      <span class="panel-badge">RACES & PRs</span>
+    </div>
+    <div class="panel-body">
+      <table class="data-table efforts-table">
+        <thead>
+          <tr><th>DATE</th><th>NAME</th><th class="num">DIST</th><th class="num">PACE</th><th class="num">HR</th><th class="num">PRs</th></tr>
+        </thead>
+        <tbody>
+          <!-- Populated from JSON -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BOTTOM RIGHT: Training Insights -->
+  <section class="panel panel-insights">
+    <div class="panel-header">
+      <span class="panel-title">TRAINING INSIGHTS</span>
+      <div class="panel-tabs">
+        <button class="insight-tab active" data-insight="alerts">ALERTS</button>
+        <button class="insight-tab" data-insight="recs">PLAN</button>
+        <button class="insight-tab" data-insight="splits">SPLITS</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="insight-content" id="insight-alerts">
+        <!-- Populated from JSON -->
+      </div>
+
+      <div class="insight-content hidden" id="insight-recs">
+        <div class="schedule-grid">
+          <div class="sched-day"><span class="sched-label">MON</span><span class="sched-detail">Weights 60-75min + Easy Run 4-5mi Z2</span></div>
+          <div class="sched-day"><span class="sched-label">TUE</span><span class="sched-detail">Quality Run 5-7mi Z4-5 + Recovery Ride 30min</span></div>
+          <div class="sched-day"><span class="sched-label">WED</span><span class="sched-detail">Weights 60-75min + Easy Run 4-5mi Z2</span></div>
+          <div class="sched-day"><span class="sched-label">THU</span><span class="sched-detail">Moderate Run 5-6mi Z2-3 + Swim 30-40min</span></div>
+          <div class="sched-day"><span class="sched-label">FRI</span><span class="sched-detail">Weights 60-75min + Easy Ride 30-45min</span></div>
+          <div class="sched-day"><span class="sched-label">SAT</span><span class="sched-detail highlight-text">Long Run 8-13mi OUTDOORS — Easy Z2</span></div>
+          <div class="sched-day rest"><span class="sched-label">SUN</span><span class="sched-detail">REST — Light active recovery only</span></div>
+        </div>
+        <div class="sched-targets">
+          <div class="target-item"><span class="target-label">WEEKLY RUN</span><span class="target-val">32-40 mi</span></div>
+          <div class="target-item"><span class="target-label">WEIGHTS</span><span class="target-val">3x/wk</span></div>
+          <div class="target-item"><span class="target-label">RIDES</span><span class="target-val">2x/wk</span></div>
+          <div class="target-item"><span class="target-label">SWIM</span><span class="target-val">1x/wk</span></div>
+        </div>
+      </div>
+
+      <div class="insight-content hidden" id="insight-splits">
+        <div class="splits-header">INDOOR vs OUTDOOR</div>
+        <table class="data-table splits-table">
+          <thead><tr><th>METRIC</th><th class="num">INDOOR</th><th class="num">OUTDOOR</th><th class="num">DELTA</th></tr></thead>
+          <tbody>
+            <tr><td>Runs</td><td class="num">64</td><td class="num">26</td><td class="num muted">71/29%</td></tr>
+            <tr><td>Avg Pace</td><td class="num">9:53/mi</td><td class="num accent">8:55/mi</td><td class="num up">-0:58</td></tr>
+          </tbody>
+        </table>
+        <div class="splits-header" style="margin-top:12px">POWER ZONES</div>
+        <table class="data-table splits-table">
+          <thead><tr><th>ZONE</th><th class="num">POWER</th><th class="num">USE FOR</th></tr></thead>
+          <tbody>
+            <tr><td>Easy</td><td class="num">220-235W</td><td class="num muted">Recovery, base</td></tr>
+            <tr><td>Tempo</td><td class="num">260-275W</td><td class="num muted">Sustained effort</td></tr>
+            <tr><td>Threshold</td><td class="num accent">285-300W</td><td class="num muted">Race prep</td></tr>
+            <tr><td>Race</td><td class="num warn-text">311W</td><td class="num muted">Hachie effort</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING TIME DISTRIBUTION -->
+  <section class="panel panel-distribution">
+    <div class="panel-header">
+      <span class="panel-title">TIME DISTRIBUTION</span>
+      <span class="panel-badge">186.9 HRS</span>
+    </div>
+    <div class="panel-body chart-container-sm">
+      <canvas id="distChart"></canvas>
+    </div>
+  </section>
+
+  <!-- ACTIVITY PATTERN -->
+  <section class="panel panel-patterns">
+    <div class="panel-header">
+      <span class="panel-title">TRAINING PATTERNS</span>
+    </div>
+    <div class="panel-body">
+      <div class="pattern-grid">
+        <div class="pattern-item">
+          <span class="pattern-label">ACTIVE DAYS</span>
+          <span class="pattern-val">117<span class="pattern-unit">/138</span></span>
+        </div>
+        <div class="pattern-item">
+          <span class="pattern-label">LONGEST STREAK</span>
+          <span class="pattern-val">22<span class="pattern-unit">days</span></span>
+        </div>
+        <div class="pattern-item">
+          <span class="pattern-label">MULTI-SESSION</span>
+          <span class="pattern-val">60<span class="pattern-unit">%</span></span>
+        </div>
+        <div class="pattern-item">
+          <span class="pattern-label">ACTS/DAY</span>
+          <span class="pattern-val">1.4</span>
+        </div>
+      </div>
+      <div class="time-of-day">
+        <div class="tod-bar">
+          <div class="tod-segment" style="width:46%" title="Early AM 4-8: 46%"><span>AM</span></div>
+          <div class="tod-segment tod-mid" style="width:36%" title="Morning 8-12: 36%"><span>MID</span></div>
+          <div class="tod-segment tod-aft" style="width:12%" title="Afternoon: 12%"><span>AFT</span></div>
+          <div class="tod-segment tod-eve" style="width:6%" title="Evening: 6%"><span>EVE</span></div>
+        </div>
+        <div class="tod-legend">
+          <span>4-8AM 46%</span><span>8-12 36%</span><span>12-4 12%</span><span>4-8PM 6%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM BAR -->
+<footer class="bottom-bar">
+  <span class="bottom-left">Loading...</span>
+  <a href="https://github.com/buloxdev/strava-terminal" target="_blank" rel="noopener noreferrer" class="attribution">GitHub</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
