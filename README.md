@@ -40,7 +40,7 @@ A Bloomberg Terminal-style dashboard for your Strava training data. Dark, data-d
    python3 -m http.server 3000
    ```
 
-4. **Open** `http://localhost:3000` in your browser.
+4. **Open** local host in your browser.
 
 ## Project Structure
 
